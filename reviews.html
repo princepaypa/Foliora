@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Découvrez les avis des entrepreneurs qui utilisent Foliora pour leur portfolio professionnel." />
+  <meta name="robots" content="index, follow" />
+  <title>Foliora — Avis utilisateurs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="reviews.css" />
+</head>
+<body class="reviews-page">
+
+  <!-- HEADER -->
+  <header class="reviews-header" id="reviewsHeader">
+    <div class="container reviews-header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__dot"></span>
+        Foliora
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav__link">Accueil</a>
+        <a href="index.html#pricing" class="nav__link">Tarifs</a>
+        <a href="login.html" class="nav__link">Connexion</a>
+        <a href="login.html" class="btn btn--primary">Commencer</a>
+      </nav>
+      <button class="burger" id="burger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index.html" class="mobile-nav__link">Accueil</a>
+      <a href="index.html#pricing" class="mobile-nav__link">Tarifs</a>
+      <a href="login.html" class="mobile-nav__link">Connexion</a>
+      <a href="login.html" class="btn btn--primary">Commencer</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="reviews-hero">
+    <div class="reviews-hero__bg">
+      <div class="rhero-blob rhero-blob--1"></div>
+      <div class="rhero-blob rhero-blob--2"></div>
+      <div class="rhero-grid"></div>
+    </div>
+    <div class="container reviews-hero__inner">
+      <div class="reviews-hero__badge">
+        <span class="badge__dot"></span>
+        Avis vérifiés — Entrepreneurs réels
+      </div>
+      <h1 class="reviews-hero__title">
+        Ce que disent nos<br />
+        <span class="reviews-hero__accent">entrepreneurs</span>
+      </h1>
+      <p class="reviews-hero__sub">Des centaines d'entrepreneurs ont déjà leur présence en ligne grâce à Foliora. Voici ce qu'ils en pensent.</p>
+
+      <!-- Note globale -->
+      <div class="global-rating">
+        <div class="global-rating__score" id="globalScore">4.9</div>
+        <div class="global-rating__right">
+          <div class="global-rating__stars" id="globalStars"></div>
+          <p class="global-rating__count"><span id="totalReviews">0</span> avis vérifiés</p>
+          <div class="global-rating__bars" id="ratingBars"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULAIRE AVIS -->
+  <section class="review-form-section">
+    <div class="container">
+      <div class="review-form-card" id="reviewFormCard">
+        <div class="review-form-card__header">
+          <h2 class="review-form-card__title">✦ Laissez votre avis</h2>
+          <p class="review-form-card__sub">Partagez votre expérience avec Foliora. Votre avis aide d'autres entrepreneurs.</p>
+        </div>
+
+        <!-- Alerte connexion -->
+        <div class="review-login-alert" id="reviewLoginAlert" style="display:none">
+          <span>🔒</span>
+          <div>
+            <strong>Connexion requise</strong>
+            <p>Vous devez être connecté pour laisser un avis.</p>
+          </div>
+          <a href="login.html" class="btn btn--primary btn--sm">Se connecter</a>
+        </div>
+
+        <form class="review-form" id="reviewForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="reviewName">Votre prénom & nom <span class="required">*</span></label>
+              <input type="text" id="reviewName" class="form-input" placeholder="Jean Dupont" />
+              <span class="form-error" id="reviewNameErr"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="reviewJob">Votre métier <span class="required">*</span></label>
+              <input type="text" id="reviewJob" class="form-input" placeholder="Consultant Marketing" />
+              <span class="form-error" id="reviewJobErr"></span>
+            </div>
+          </div>
+
+          <!-- Étoiles -->
+          <div class="form-group">
+            <label class="form-label">Votre note <span class="required">*</span></label>
+            <div class="star-picker" id="starPicker">
+              <button type="button" class="star-btn" data-value="1" onclick="setRating(1)">★</button>
+              <button type="button" class="star-btn" data-value="2" onclick="setRating(2)">★</button>
+              <button type="button" class="star-btn" data-value="3" onclick="setRating(3)">★</button>
+              <button type="button" class="star-btn" data-value="4" onclick="setRating(4)">★</button>
+              <button type="button" class="star-btn" data-value="5" onclick="setRating(5)">★</button>
+              <span class="star-label" id="starLabel">Cliquez pour noter</span>
+            </div>
+            <span class="form-error" id="reviewRatingErr"></span>
+          </div>
+
+          <!-- Commentaire -->
+          <div class="form-group">
+            <label class="form-label" for="reviewComment">Votre commentaire <span class="required">*</span></label>
+            <div class="textarea-wrap">
+              <textarea id="reviewComment" class="form-textarea" placeholder="Partagez votre expérience avec Foliora — ce que vous avez aimé, comment ça vous a aidé..." rows="4" maxlength="500"></textarea>
+              <span class="textarea-count"><span id="commentCount">0</span> / 500</span>
+            </div>
+            <span class="form-error" id="reviewCommentErr"></span>
+          </div>
+
+          <div class="form-alert form-alert--error" id="reviewAlert" style="display:none"></div>
+          <div class="form-alert form-alert--success" id="reviewSuccess" style="display:none"></div>
+
+          <button type="submit" class="btn btn--primary btn--lg" id="reviewSubmitBtn">
+            <span class="btn-text">Publier mon avis</span>
+            <span class="btn-loader" style="display:none">⏳</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTE DES AVIS -->
+  <section class="reviews-list-section">
+    <div class="container">
+
+      <!-- Filtres -->
+      <div class="reviews-filters">
+        <span class="filters-label">Trier par :</span>
+        <div class="filters-btns">
+          <button class="filter-btn active" onclick="filterReviews('recent', this)">Plus récents</button>
+          <button class="filter-btn" onclick="filterReviews('best', this)">Meilleure note</button>
+          <button class="filter-btn" onclick="filterReviews('worst', this)">Moins bonne note</button>
+        </div>
+        <span class="filters-count"><span id="filteredCount">0</span> avis</span>
+      </div>
+
+      <!-- Grille -->
+      <div class="reviews-grid" id="reviewsGrid"></div>
+
+      <!-- Vide -->
+      <div class="reviews-empty" id="reviewsEmpty" style="display:none">
+        <div class="reviews-empty__icon">💬</div>
+        <h3>Aucun avis pour l'instant</h3>
+        <p>Soyez le premier à partager votre expérience !</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="reviews-cta">
+    <div class="container reviews-cta__inner">
+      <div class="reviews-cta__blob"></div>
+      <h2 class="reviews-cta__title">Prêt à rejoindre ces entrepreneurs ?</h2>
+      <p class="reviews-cta__sub">Créez votre portfolio professionnel en 2 minutes grâce à l'IA.</p>
+      <a href="login.html" class="btn btn--white btn--lg">✦ Créer mon portfolio — 5€/mois</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__dot"></span>
+        Foliora
+      </a>
+      <p class="footer__tagline">Votre présence en ligne, en quelques minutes.</p>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Mentions légales</a>
+        <a href="#" class="footer__link">Politique de confidentialité</a>
+        <a href="#" class="footer__link">Contact</a>
+      </div>
+      <p class="footer__copy">© 2026 Foliora. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ==============================
+    // DONNÉES
+    // ==============================
+    let currentRating = 0;
+    let currentFilter = 'recent';
+
+    // Avis simulés réalistes
+    let reviews = [
+      { id: 1, name: 'Marie Koné', job: 'Consultante RH', rating: 5, comment: 'Foliora a transformé ma visibilité en ligne. En moins de 3 minutes, j\'avais un portfolio professionnel que mes clients adorent. L\'IA a vraiment su mettre en valeur mon parcours.', date: new Date('2026-05-28'), initials: 'MK', color: 'linear-gradient(135deg,#FBBF24,#F59E0B)' },
+      { id: 2, name: 'Amine Bensalem', job: 'Coach Business', rating: 5, comment: 'Incroyable outil ! Je cherchais depuis des mois une solution simple pour avoir une présence en ligne. Foliora l\'a fait en quelques minutes. 5 étoiles sans hésitation.', date: new Date('2026-05-22'), initials: 'AB', color: 'linear-gradient(135deg,#34D399,#059669)' },
+      { id: 3, name: 'Sophie Mercier', job: 'Photographe', rating: 5, comment: 'Le design généré est vraiment propre et professionnel. Mes clients me demandent souvent qui a fait mon site — ils sont surpris quand je dis que c\'est une IA ! Bravo Foliora.', date: new Date('2026-05-18'), initials: 'SM', color: 'linear-gradient(135deg,#60A5FA,#2D6EFF)' },
+      { id: 4, name: 'Karim Diallo', job: 'Développeur Web', rating: 4, comment: 'Très bon service. La section réalisations m\'a permis de montrer mes projets efficacement. J\'aurais aimé un peu plus de personnalisation sur les couleurs, mais globalement excellent.', date: new Date('2026-05-14'), initials: 'KD', color: 'linear-gradient(135deg,#A78BFA,#7C3AED)' },
+      { id: 5, name: 'Fatou Traoré', job: 'Formatrice Indépendante', rating: 5, comment: 'Je ne maîtrise pas la technologie mais Foliora est tellement simple. Le formulaire guide pas à pas et le résultat est magnifique. Mon portfolio est maintenant sur Google !', date: new Date('2026-05-10'), initials: 'FT', color: 'linear-gradient(135deg,#F87171,#DC2626)' },
+      { id: 6, name: 'Lucas Fontaine', job: 'Consultant Finance', rating: 4, comment: 'Rapport qualité/prix imbattable. Pour 5€/mois, j\'ai une présence en ligne professionnelle qui m\'a déjà apporté 3 nouveaux clients. L\'IA rédige vraiment bien.', date: new Date('2026-05-05'), initials: 'LF', color: 'linear-gradient(135deg,#6EE7B7,#059669)' },
+    ];
+
+    // ==============================
+    // ÉTOILES
+    // ==============================
+    const starLabels = ['', 'Très mauvais', 'Mauvais', 'Correct', 'Bien', 'Excellent !'];
+
+    function setRating(value) {
+      currentRating = value;
+      document.querySelectorAll('.star-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i < value);
+      });
+      document.getElementById('starLabel').textContent = starLabels[value];
+      document.getElementById('starLabel').style.color = value >= 4 ? '#22C55E' : value === 3 ? '#FBBF24' : '#EF4444';
+    }
+
+    // Hover étoiles
+    document.querySelectorAll('.star-btn').forEach((btn, index) => {
+      btn.addEventListener('mouseenter', () => {
+        document.querySelectorAll('.star-btn').forEach((b, i) => b.classList.toggle('hover', i <= index));
+      });
+      btn.addEventListener('mouseleave', () => {
+        document.querySelectorAll('.star-btn').forEach(b => b.classList.remove('hover'));
+      });
+    });
+
+    // ==============================
+    // COMPTEUR TEXTAREA
+    // ==============================
+    document.getElementById('reviewComment').addEventListener('input', function () {
+      document.getElementById('commentCount').textContent = this.value.length;
+    });
+
+    // ==============================
+    // SOUMISSION FORMULAIRE
+    // ==============================
+    document.getElementById('reviewForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearErrors();
+
+      const name = document.getElementById('reviewName').value.trim();
+      const job = document.getElementById('reviewJob').value.trim();
+      const comment = document.getElementById('reviewComment').value.trim();
+      let valid = true;
+
+      if (!name) { showErr('reviewNameErr', 'Votre nom est requis.'); valid = false; }
+      if (!job) { showErr('reviewJobErr', 'Votre métier est requis.'); valid = false; }
+      if (!currentRating) { showErr('reviewRatingErr', 'Veuillez sélectionner une note.'); valid = false; }
+      if (!comment) { showErr('reviewCommentErr', 'Votre commentaire est requis.'); valid = false; }
+      else if (comment.length < 20) { showErr('reviewCommentErr', 'Écrivez au moins 20 caractères.'); valid = false; }
+
+      if (!valid) return;
+
+      // Loading
+      const btn = document.getElementById('reviewSubmitBtn');
+      btn.querySelector('.btn-text').style.display = 'none';
+      btn.querySelector('.btn-loader').style.display = 'inline';
+      btn.disabled = true;
+
+      // Simulation envoi
+      setTimeout(() => {
+        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+        const colors = [
+          'linear-gradient(135deg,#FBBF24,#F59E0B)',
+          'linear-gradient(135deg,#34D399,#059669)',
+          'linear-gradient(135deg,#60A5FA,#2D6EFF)',
+          'linear-gradient(135deg,#A78BFA,#7C3AED)',
+          'linear-gradient(135deg,#F87171,#DC2626)',
+          'linear-gradient(135deg,#6EE7B7,#059669)',
+        ];
+        const newReview = {
+          id: Date.now(),
+          name, job,
+          rating: currentRating,
+          comment,
+          date: new Date(),
+          initials,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          isNew: true,
+        };
+
+        reviews.unshift(newReview);
+
+        // TODO : Supabase insert ici
+        // await supabase.from('reviews').insert([{ name, job, rating: currentRating, comment }]);
+
+        // Reset
+        document.getElementById('reviewForm').reset();
+        setRating(0);
+        document.getElementById('commentCount').textContent = '0';
+        currentRating = 0;
+        btn.querySelector('.btn-text').style.display = 'inline';
+        btn.querySelector('.btn-loader').style.display = 'none';
+        btn.disabled = false;
+
+        // Succès
+        const successEl = document.getElementById('reviewSuccess');
+        successEl.textContent = '✓ Votre avis a été publié. Merci !';
+        successEl.style.display = 'block';
+        setTimeout(() => successEl.style.display = 'none', 4000);
+
+        // Rafraîchir
+        updateGlobalStats();
+        renderReviews();
+
+      }, 1200);
+    });
+
+    // ==============================
+    // RENDU DES AVIS
+    // ==============================
+    function renderReviews() {
+      const grid = document.getElementById('reviewsGrid');
+      const empty = document.getElementById('reviewsEmpty');
+
+      let sorted = [...reviews];
+      if (currentFilter === 'best') sorted.sort((a, b) => b.rating - a.rating);
+      else if (currentFilter === 'worst') sorted.sort((a, b) => a.rating - b.rating);
+      else sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      document.getElementById('filteredCount').textContent = sorted.length;
+
+      if (sorted.length === 0) {
+        grid.innerHTML = '';
+        empty.style.display = 'flex';
+        return;
+      }
+      empty.style.display = 'none';
+
+      grid.innerHTML = sorted.map(r => `
+        <div class="review-card ${r.isNew ? 'review-card--new' : ''}" id="review_${r.id}">
+          <div class="review-card__header">
+            <div class="review-card__avatar" style="background:${r.color}">${r.initials}</div>
+            <div class="review-card__info">
+              <strong class="review-card__name">${r.name}</strong>
+              <span class="review-card__job">${r.job}</span>
+            </div>
+            ${r.isNew ? '<span class="review-card__new-badge">Nouveau</span>' : ''}
+          </div>
+          <div class="review-card__stars">${renderStars(r.rating)}</div>
+          <p class="review-card__comment">"${r.comment}"</p>
+          <span class="review-card__date">${formatDate(r.date)}</span>
+        </div>
+      `).join('');
+
+      // Animer la nouvelle carte
+      if (reviews[0]?.isNew) {
+        setTimeout(() => {
+          const el = document.getElementById(`review_${reviews[0].id}`);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+    }
+
+    function renderStars(rating) {
+      return Array.from({ length: 5 }, (_, i) =>
+        `<span class="star ${i < rating ? 'star--filled' : 'star--empty'}">★</span>`
+      ).join('');
+    }
+
+    function formatDate(date) {
+      return new Date(date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    // ==============================
+    // STATISTIQUES GLOBALES
+    // ==============================
+    function updateGlobalStats() {
+      const total = reviews.length;
+      const avg = total ? (reviews.reduce((s, r) => s + r.rating, 0) / total).toFixed(1) : '0.0';
+
+      document.getElementById('totalReviews').textContent = total;
+      document.getElementById('globalScore').textContent = avg;
+
+      // Étoiles globales
+      const starsEl = document.getElementById('globalStars');
+      starsEl.innerHTML = Array.from({ length: 5 }, (_, i) => {
+        const filled = i < Math.round(avg);
+        return `<span class="global-star ${filled ? 'global-star--filled' : ''}">★</span>`;
+      }).join('');
+
+      // Barres par note
+      const barsEl = document.getElementById('ratingBars');
+      barsEl.innerHTML = [5, 4, 3, 2, 1].map(star => {
+        const count = reviews.filter(r => r.rating === star).length;
+        const pct = total ? Math.round((count / total) * 100) : 0;
+        return `
+          <div class="rating-bar">
+            <span class="rating-bar__label">${star}★</span>
+            <div class="rating-bar__track">
+              <div class="rating-bar__fill" style="width:${pct}%"></div>
+            </div>
+            <span class="rating-bar__count">${count}</span>
+          </div>`;
+      }).join('');
+    }
+
+    // ==============================
+    // FILTRES
+    // ==============================
+    function filterReviews(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderReviews();
+    }
+
+    // ==============================
+    // UTILITAIRES
+    // ==============================
+    function showErr(id, msg) {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = msg; el.style.display = 'block'; }
+    }
+    function clearErrors() {
+      document.querySelectorAll('.form-error').forEach(el => { el.textContent = ''; el.style.display = 'none'; });
+      document.getElementById('reviewAlert').style.display = 'none';
+      document.getElementById('reviewSuccess').style.display = 'none';
+    }
+
+    // ==============================
+    // HEADER SCROLL
+    // ==============================
+    window.addEventListener('scroll', () => {
+      document.getElementById('reviewsHeader').classList.toggle('header--scrolled', window.scrollY > 30);
+    });
+
+    // Burger menu
+    document.getElementById('burger').addEventListener('click', () => {
+      document.getElementById('burger').classList.toggle('active');
+      document.getElementById('mobileNav').classList.toggle('active');
+    });
+
+    // ==============================
+    // INIT
+    // ==============================
+    updateGlobalStats();
+    renderReviews();
+  </script>
+</body>
+</html>

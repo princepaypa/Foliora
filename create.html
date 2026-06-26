@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Foliora — Créer mon portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="create.css" />
+</head>
+<body class="create-page">
+
+  <!-- HEADER -->
+  <header class="create-header">
+    <div class="container create-header__inner">
+      <a href="dashboard.html" class="create-header__back">← Retour au dashboard</a>
+      <a href="index.html" class="logo">
+        <span class="logo__dot"></span>
+        Foliora
+      </a>
+      <div class="create-header__limit" id="portfolioLimit">
+        <span class="limit-icon">📁</span>
+        <span id="limitText">1 / 3 portfolios utilisés</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- WIZARD WRAP -->
+  <main class="wizard-wrap">
+
+    <!-- PROGRESS BAR -->
+    <div class="wizard-progress">
+      <div class="progress-steps">
+        <div class="progress-step active" data-step="1">
+          <div class="progress-step__dot">1</div>
+          <span class="progress-step__label">Identité</span>
+        </div>
+        <div class="progress-line" id="line1"></div>
+        <div class="progress-step" data-step="2">
+          <div class="progress-step__dot">2</div>
+          <span class="progress-step__label">Métier</span>
+        </div>
+        <div class="progress-line" id="line2"></div>
+        <div class="progress-step" data-step="3">
+          <div class="progress-step__dot">3</div>
+          <span class="progress-step__label">À propos</span>
+        </div>
+        <div class="progress-line" id="line3"></div>
+        <div class="progress-step" data-step="4">
+          <div class="progress-step__dot">4</div>
+          <span class="progress-step__label">Expériences</span>
+        </div>
+        <div class="progress-line" id="line4"></div>
+        <div class="progress-step" data-step="5">
+          <div class="progress-step__dot">5</div>
+          <span class="progress-step__label">Réalisations</span>
+        </div>
+        <div class="progress-line" id="line5"></div>
+        <div class="progress-step" data-step="6">
+          <div class="progress-step__dot">6</div>
+          <span class="progress-step__label">Contact</span>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:16.6%"></div>
+      </div>
+    </div>
+
+    <!-- WIZARD CARD -->
+    <div class="wizard-card">
+
+      <!-- ===== ÉTAPE 1 — IDENTITÉ ===== -->
+      <div class="wizard-step active" id="step1">
+        <div class="step-header">
+          <span class="step-badge">Étape 1 / 5</span>
+          <h2 class="step-title">Votre identité</h2>
+          <p class="step-sub">Ces informations apparaîtront en tête de votre portfolio.</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="firstName">Prénom <span class="required">*</span></label>
+            <div class="input-wrap">
+              <input type="text" id="firstName" class="form-input" placeholder="Jean" required />
+            </div>
+            <span class="form-error" id="firstNameErr"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lastName">Nom <span class="required">*</span></label>
+            <div class="input-wrap">
+              <input type="text" id="lastName" class="form-input" placeholder="Dupont" required />
+            </div>
+            <span class="form-error" id="lastNameErr"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="portfolioTitle">Titre de ce portfolio <span class="required">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="portfolioTitle" class="form-input" placeholder="Ex : Mon portfolio consulting" required />
+          </div>
+          <span class="form-hint">Nom interne pour vous retrouver dans votre dashboard.</span>
+          <span class="form-error" id="portfolioTitleErr"></span>
+        </div>
+
+        <!-- Photo de profil -->
+        <div class="form-group">
+          <label class="form-label">
+            Photo de profil
+            <span class="optional-tag">Optionnel — recommandé</span>
+          </label>
+          <div class="upload-zone" id="uploadZone1" onclick="triggerUpload('profilePhoto')">
+            <input type="file" id="profilePhoto" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handlePhoto('profilePhoto','preview1','uploadZone1')" />
+            <div class="upload-zone__placeholder" id="placeholder1">
+              <div class="upload-zone__icon">🖼</div>
+              <p class="upload-zone__text">Cliquez pour ajouter votre photo de profil</p>
+              <p class="upload-zone__hint">JPG, PNG ou WEBP — max 2MB</p>
+            </div>
+            <img id="preview1" class="upload-zone__preview" style="display:none" alt="Aperçu photo de profil" />
+          </div>
+          <button type="button" class="remove-photo" id="removePhoto1" style="display:none" onclick="removePhoto('profilePhoto','preview1','uploadZone1','removePhoto1','placeholder1')">✕ Supprimer la photo</button>
+          <span class="form-error" id="profilePhotoErr"></span>
+        </div>
+      </div>
+
+      <!-- ===== ÉTAPE 2 — MÉTIER ===== -->
+      <div class="wizard-step" id="step2">
+        <div class="step-header">
+          <span class="step-badge">Étape 2 / 5</span>
+          <h2 class="step-title">Votre métier</h2>
+          <p class="step-sub">Dites-nous ce que vous faites professionnellement.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="jobTitle">Titre professionnel <span class="required">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="jobTitle" class="form-input" placeholder="Ex : Consultant Marketing Digital" required />
+          </div>
+          <span class="form-error" id="jobTitleErr"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="sector">Secteur d'activité <span class="required">*</span></label>
+          <div class="input-wrap select-wrap">
+            <select id="sector" class="form-input form-select" required>
+              <option value="" disabled selected>Choisir un secteur</option>
+              <option>Marketing & Communication</option>
+              <option>Consulting & Conseil</option>
+              <option>Commerce & Vente</option>
+              <option>Finance & Comptabilité</option>
+              <option>Droit & Juridique</option>
+              <option>Santé & Bien-être</option>
+              <option>Éducation & Formation</option>
+              <option>Technologie & Informatique</option>
+              <option>Design & Créatif</option>
+              <option>Immobilier</option>
+              <option>Restauration & Hôtellerie</option>
+              <option>Sport & Coaching</option>
+              <option>Autre</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+          <span class="form-error" id="sectorErr"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="location">Ville / Pays <span class="required">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="location" class="form-input" placeholder="Ex : Paris, France" required />
+          </div>
+          <span class="form-error" id="locationErr"></span>
+        </div>
+
+        <!-- Photo métier -->
+        <div class="form-group">
+          <label class="form-label">
+            Photo de votre environnement de travail
+            <span class="optional-tag">Optionnel</span>
+          </label>
+          <div class="upload-zone" id="uploadZone2" onclick="triggerUpload('workPhoto')">
+            <input type="file" id="workPhoto" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handlePhoto('workPhoto','preview2','uploadZone2')" />
+            <div class="upload-zone__placeholder" id="placeholder2">
+              <div class="upload-zone__icon">🏢</div>
+              <p class="upload-zone__text">Bureau, atelier, espace de travail...</p>
+              <p class="upload-zone__hint">JPG, PNG ou WEBP — max 2MB</p>
+            </div>
+            <img id="preview2" class="upload-zone__preview" style="display:none" alt="Aperçu photo métier" />
+          </div>
+          <button type="button" class="remove-photo" id="removePhoto2" style="display:none" onclick="removePhoto('workPhoto','preview2','uploadZone2','removePhoto2','placeholder2')">✕ Supprimer la photo</button>
+        </div>
+      </div>
+
+      <!-- ===== ÉTAPE 3 — À PROPOS ===== -->
+      <div class="wizard-step" id="step3">
+        <div class="step-header">
+          <span class="step-badge">Étape 3 / 5</span>
+          <h2 class="step-title">À propos de vous</h2>
+          <p class="step-sub">Décrivez-vous librement — l'IA va améliorer et professionnaliser votre texte.</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="aboutText">Parlez de vous <span class="required">*</span></label>
+          <div class="textarea-wrap">
+            <textarea
+              id="aboutText"
+              class="form-textarea"
+              placeholder="Ex : Je suis consultant marketing depuis 8 ans, j'aide les entrepreneurs à développer leur présence en ligne..."
+              rows="6"
+              maxlength="800"
+              required
+            ></textarea>
+            <span class="textarea-count"><span id="aboutCount">0</span> / 800</span>
+          </div>
+          <span class="form-hint">✨ L'IA va améliorer votre texte automatiquement — écrivez naturellement.</span>
+          <span class="form-error" id="aboutTextErr"></span>
+        </div>
+
+        <!-- Photo lifestyle -->
+        <div class="form-group">
+          <label class="form-label">
+            Photo "vous en action"
+            <span class="optional-tag">Optionnel</span>
+          </label>
+          <div class="upload-zone" id="uploadZone3" onclick="triggerUpload('lifestylePhoto')">
+            <input type="file" id="lifestylePhoto" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handlePhoto('lifestylePhoto','preview3','uploadZone3')" />
+            <div class="upload-zone__placeholder" id="placeholder3">
+              <div class="upload-zone__icon">📸</div>
+              <p class="upload-zone__text">Une photo de vous en train de travailler, en réunion...</p>
+              <p class="upload-zone__hint">JPG, PNG ou WEBP — max 2MB</p>
+            </div>
+            <img id="preview3" class="upload-zone__preview" style="display:none" alt="Aperçu photo lifestyle" />
+          </div>
+          <button type="button" class="remove-photo" id="removePhoto3" style="display:none" onclick="removePhoto('lifestylePhoto','preview3','uploadZone3','removePhoto3','placeholder3')">✕ Supprimer la photo</button>
+        </div>
+      </div>
+
+      <!-- ===== ÉTAPE 4 — EXPÉRIENCES ===== -->
+      <div class="wizard-step" id="step4">
+        <div class="step-header">
+          <span class="step-badge">Étape 4 / 5</span>
+          <h2 class="step-title">Expériences & Compétences</h2>
+          <p class="step-sub">Vos expériences passées et vos compétences clés.</p>
+        </div>
+
+        <!-- Expériences -->
+        <div class="form-group">
+          <label class="form-label">Expériences professionnelles <span class="required">*</span></label>
+          <div class="exp-list" id="expList">
+            <div class="exp-item" id="exp0">
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" class="form-input" placeholder="Poste — Ex : Directeur Commercial" data-field="expTitle" />
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-input" placeholder="Entreprise — Ex : AgencePro" data-field="expCompany" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <input type="text" class="form-input" placeholder="Année début — Ex : 2018" data-field="expStart" />
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-input" placeholder="Année fin — Ex : 2023 ou Aujourd'hui" data-field="expEnd" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="add-item-btn" onclick="addExperience()">+ Ajouter une expérience</button>
+          <span class="form-error" id="expErr"></span>
+        </div>
+
+        <!-- Compétences -->
+        <div class="form-group">
+          <label class="form-label">Compétences clés <span class="required">*</span></label>
+          <div class="input-wrap">
+            <input type="text" id="skills" class="form-input" placeholder="Ex : Marketing, SEO, Gestion de projet, Excel..." required />
+          </div>
+          <span class="form-hint">Séparez vos compétences par des virgules.</span>
+          <div class="skills-preview" id="skillsPreview"></div>
+          <span class="form-error" id="skillsErr"></span>
+        </div>
+
+        <!-- Photo projets -->
+        <div class="form-group">
+          <label class="form-label">
+            Photo d'un projet ou réalisation
+            <span class="optional-tag">Optionnel</span>
+          </label>
+          <div class="upload-zone" id="uploadZone4" onclick="triggerUpload('projectPhoto')">
+            <input type="file" id="projectPhoto" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handlePhoto('projectPhoto','preview4','uploadZone4')" />
+            <div class="upload-zone__placeholder" id="placeholder4">
+              <div class="upload-zone__icon">💼</div>
+              <p class="upload-zone__text">Un projet dont vous êtes fier, une réalisation concrète...</p>
+              <p class="upload-zone__hint">JPG, PNG ou WEBP — max 2MB</p>
+            </div>
+            <img id="preview4" class="upload-zone__preview" style="display:none" alt="Aperçu photo projet" />
+          </div>
+          <button type="button" class="remove-photo" id="removePhoto4" style="display:none" onclick="removePhoto('projectPhoto','preview4','uploadZone4','removePhoto4','placeholder4')">✕ Supprimer la photo</button>
+        </div>
+      </div>
+
+      <!-- ===== ÉTAPE 5 — RÉALISATIONS ===== -->
+      <div class="wizard-step" id="step5">
+        <div class="step-header">
+          <span class="step-badge">Étape 5 / 6</span>
+          <h2 class="step-title">Vos réalisations</h2>
+          <p class="step-sub">Site, vidéo, photo, design... Montrez ce que vous avez accompli. Cette étape est entièrement optionnelle.</p>
+        </div>
+
+        <div class="projects-empty-hint" id="projectsHint">
+          <span>📁</span>
+          <p>Aucune réalisation ajoutée. Si vous n'en avez pas, passez à l'étape suivante.</p>
+        </div>
+
+        <div class="projects-list" id="projectsList"></div>
+
+        <button type="button" class="add-item-btn" id="addProjectBtn" onclick="addProject()">+ Ajouter une réalisation</button>
+        <span class="form-hint" style="margin-top:8px;display:block">Maximum 4 réalisations — site web, vidéo, photo, présentation, design ou autre.</span>
+      </div>
+
+      <!-- ===== ÉTAPE 6 — CONTACT ===== -->
+      <div class="wizard-step" id="step6">
+        <div class="step-header">
+          <span class="step-badge">Étape 6 / 6</span>
+          <h2 class="step-title">Contact & Réseaux</h2>
+          <p class="step-sub">Comment vos clients peuvent vous joindre.</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="contactEmail">Email de contact <span class="required">*</span></label>
+            <div class="input-wrap">
+              <input type="email" id="contactEmail" class="form-input" placeholder="jean@exemple.com" />
+            </div>
+            <span class="form-error" id="contactEmailErr"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="whatsapp">WhatsApp <span class="optional-tag">Optionnel</span></label>
+            <div class="input-wrap">
+              <input type="tel" id="whatsapp" class="form-input" placeholder="+33 6 12 34 56 78" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="linkedin">LinkedIn <span class="optional-tag">Optionnel</span></label>
+            <div class="input-wrap">
+              <input type="url" id="linkedin" class="form-input" placeholder="https://linkedin.com/in/jean-dupont" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="instagram">Instagram <span class="optional-tag">Optionnel</span></label>
+            <div class="input-wrap">
+              <input type="text" id="instagram" class="form-input" placeholder="@jean.dupont" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="website">Site web existant <span class="optional-tag">Optionnel</span></label>
+          <div class="input-wrap">
+            <input type="url" id="website" class="form-input" placeholder="https://www.monsite.com" />
+          </div>
+        </div>
+
+        <!-- Récapitulatif -->
+        <div class="recap-box" id="recapBox">
+          <h4 class="recap-box__title">✦ Récapitulatif avant génération</h4>
+          <div class="recap-grid" id="recapGrid"></div>
+        </div>
+      </div>
+
+      <!-- NAVIGATION -->
+      <div class="wizard-nav">
+        <button type="button" class="btn btn--ghost" id="prevBtn" onclick="prevStep()" style="visibility:hidden">← Précédent</button>
+        <div class="wizard-nav__dots">
+          <span class="nav-dot active" data-step="1"></span>
+          <span class="nav-dot" data-step="2"></span>
+          <span class="nav-dot" data-step="3"></span>
+          <span class="nav-dot" data-step="4"></span>
+          <span class="nav-dot" data-step="5"></span>
+          <span class="nav-dot" data-step="6"></span>
+        </div>
+        <button type="button" class="btn btn--primary" id="nextBtn" onclick="nextStep()">
+          Suivant →
+        </button>
+      </div>
+    </div>
+
+    <!-- LOADING GÉNÉRATION IA -->
+    <div class="ai-loading" id="aiLoading" style="display:none">
+      <div class="ai-loading__card">
+        <div class="ai-loading__spinner"></div>
+        <h3 class="ai-loading__title">L'IA génère votre portfolio...</h3>
+        <p class="ai-loading__sub">Cela prend environ 15 secondes. Ne fermez pas cette page.</p>
+        <div class="ai-loading__steps">
+          <div class="ai-step" id="aiStep1">✦ Analyse de vos informations...</div>
+          <div class="ai-step" id="aiStep2">✦ Rédaction de votre présentation...</div>
+          <div class="ai-step" id="aiStep3">✦ Optimisation SEO Google...</div>
+          <div class="ai-step" id="aiStep4">✦ Mise en forme finale...</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // ==============================
+    // ÉTAT GLOBAL
+    // ==============================
+    let currentStep = 1;
+    const totalSteps = 6;
+    let expCount = 1;
+    let projectCount = 0;
+
+    const formData = {
+      firstName: '', lastName: '', portfolioTitle: '',
+      profilePhoto: null, workPhoto: null, lifestylePhoto: null, projectPhoto: null,
+      jobTitle: '', sector: '', location: '',
+      aboutText: '',
+      experiences: [], skills: [],
+      projects: [],
+      contactEmail: '', whatsapp: '', linkedin: '', instagram: '', website: '',
+    };
+
+    // ==============================
+    // NAVIGATION
+    // ==============================
+    function nextStep() {
+      if (!validateStep(currentStep)) return;
+      collectStep(currentStep);
+      if (currentStep === totalSteps) {
+        generatePortfolio();
+        return;
+      }
+      goToStep(currentStep + 1);
+    }
+
+    function prevStep() {
+      if (currentStep > 1) goToStep(currentStep - 1);
+    }
+
+    function goToStep(step) {
+      document.getElementById(`step${currentStep}`).classList.remove('active');
+      document.querySelectorAll('.progress-step')[currentStep - 1].classList.remove('active');
+      document.querySelectorAll('.progress-step')[currentStep - 1].classList.add('done');
+
+      currentStep = step;
+
+      document.getElementById(`step${currentStep}`).classList.add('active');
+      document.querySelectorAll('.progress-step').forEach((el, i) => {
+        el.classList.toggle('active', i === currentStep - 1);
+      });
+
+      // Lignes
+      for (let i = 1; i < totalSteps; i++) {
+        document.getElementById(`line${i}`).classList.toggle('filled', i < currentStep);
+      }
+
+      // Dots
+      document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentStep - 1);
+      });
+
+      // Barre progression
+      document.getElementById('progressFill').style.width = `${(currentStep / totalSteps) * 100}%`;
+
+      // Boutons
+      document.getElementById('prevBtn').style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+      document.getElementById('nextBtn').textContent = currentStep === totalSteps ? '✦ Générer mon portfolio' : 'Suivant →';
+
+      // Récap étape 6
+      if (currentStep === 6) buildRecap();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==============================
+    // VALIDATION PAR ÉTAPE
+    // ==============================
+    function validateStep(step) {
+      clearAllErrors();
+      let valid = true;
+
+      if (step === 1) {
+        if (!v('firstName', 'firstNameErr', 'Votre prénom est requis.')) valid = false;
+        if (!v('lastName', 'lastNameErr', 'Votre nom est requis.')) valid = false;
+        if (!v('portfolioTitle', 'portfolioTitleErr', 'Donnez un titre à ce portfolio.')) valid = false;
+      }
+      if (step === 2) {
+        if (!v('jobTitle', 'jobTitleErr', 'Votre titre professionnel est requis.')) valid = false;
+        if (!v('sector', 'sectorErr', 'Choisissez votre secteur d\'activité.')) valid = false;
+        if (!v('location', 'locationErr', 'Votre ville / pays est requis.')) valid = false;
+      }
+      if (step === 3) {
+        const about = document.getElementById('aboutText').value.trim();
+        if (!about) { showErr('aboutTextErr', 'Décrivez-vous en quelques mots.'); valid = false; }
+        else if (about.length < 50) { showErr('aboutTextErr', 'Écrivez au moins 50 caractères pour que l\'IA puisse travailler.'); valid = false; }
+      }
+      if (step === 4) {
+        const firstTitle = document.querySelector('[data-field="expTitle"]');
+        if (!firstTitle || !firstTitle.value.trim()) { showErr('expErr', 'Ajoutez au moins une expérience professionnelle.'); valid = false; }
+        if (!v('skills', 'skillsErr', 'Listez au moins une compétence.')) valid = false;
+      }
+      // Étape 5 Réalisations : 100% optionnelle — pas de validation
+      if (step === 6) {
+        const email = document.getElementById('contactEmail').value.trim();
+        if (!email) { showErr('contactEmailErr', 'Votre email de contact est requis.'); valid = false; }
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('contactEmailErr', 'Email invalide.'); valid = false; }
+      }
+      return valid;
+    }
+
+    function v(id, errId, msg) {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) { showErr(errId, msg); return false; }
+      return true;
+    }
+    function showErr(id, msg) {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = msg; el.style.display = 'block'; }
+    }
+    function clearAllErrors() {
+      document.querySelectorAll('.form-error').forEach(el => { el.textContent = ''; el.style.display = 'none'; });
+    }
+
+    // ==============================
+    // COLLECTE DES DONNÉES
+    // ==============================
+    function collectStep(step) {
+      if (step === 1) {
+        formData.firstName = document.getElementById('firstName').value.trim();
+        formData.lastName = document.getElementById('lastName').value.trim();
+        formData.portfolioTitle = document.getElementById('portfolioTitle').value.trim();
+      }
+      if (step === 2) {
+        formData.jobTitle = document.getElementById('jobTitle').value.trim();
+        formData.sector = document.getElementById('sector').value;
+        formData.location = document.getElementById('location').value.trim();
+      }
+      if (step === 3) {
+        formData.aboutText = document.getElementById('aboutText').value.trim();
+      }
+      if (step === 4) {
+        formData.experiences = [];
+        document.querySelectorAll('.exp-item').forEach(item => {
+          const title = item.querySelector('[data-field="expTitle"]').value.trim();
+          const company = item.querySelector('[data-field="expCompany"]').value.trim();
+          const start = item.querySelector('[data-field="expStart"]').value.trim();
+          const end = item.querySelector('[data-field="expEnd"]').value.trim();
+          if (title) formData.experiences.push({ title, company, start, end });
+        });
+        const raw = document.getElementById('skills').value;
+        formData.skills = raw.split(',').map(s => s.trim()).filter(Boolean);
+      }
+      if (step === 5) {
+        formData.projects = [];
+        document.querySelectorAll('.project-item').forEach(item => {
+          const title = item.querySelector('.proj-title').value.trim();
+          const type = item.querySelector('.proj-type').value;
+          const desc = item.querySelector('.proj-desc').value.trim();
+          const link = item.querySelector('.proj-link').value.trim();
+          const imgEl = item.querySelector('.proj-preview');
+          const image = imgEl && imgEl.style.display !== 'none' ? imgEl.src : null;
+          if (title) formData.projects.push({ title, type, desc, link, image });
+        });
+      }
+      if (step === 6) {
+        formData.contactEmail = document.getElementById('contactEmail').value.trim();
+        formData.whatsapp = document.getElementById('whatsapp').value.trim();
+        formData.linkedin = document.getElementById('linkedin').value.trim();
+        formData.instagram = document.getElementById('instagram').value.trim();
+        formData.website = document.getElementById('website').value.trim();
+      }
+    }
+
+    // ==============================
+    // RÉCAPITULATIF
+    // ==============================
+    function buildRecap() {
+      collectStep(5);
+      const grid = document.getElementById('recapGrid');
+      grid.innerHTML = `
+        <div class="recap-item"><span>Nom</span><strong>${formData.firstName} ${formData.lastName}</strong></div>
+        <div class="recap-item"><span>Métier</span><strong>${formData.jobTitle}</strong></div>
+        <div class="recap-item"><span>Secteur</span><strong>${formData.sector}</strong></div>
+        <div class="recap-item"><span>Localisation</span><strong>${formData.location}</strong></div>
+        <div class="recap-item"><span>Expériences</span><strong>${formData.experiences.length} ajoutée(s)</strong></div>
+        <div class="recap-item"><span>Réalisations</span><strong>${formData.projects.length} ajoutée(s)</strong></div>
+      `;
+    }
+
+    // ==============================
+    // PROJETS / RÉALISATIONS
+    // ==============================
+    const typeIcons = {'Site web':'🌐','Vidéo':'🎬','Photo':'📸','Présentation':'📊','Design':'🎨','Autre':'📁'};
+
+    function addProject() {
+      if (projectCount >= 4) { alert('Maximum 4 réalisations.'); return; }
+      document.getElementById('projectsHint').style.display = 'none';
+      const pid = `project${projectCount}`;
+      const div = document.createElement('div');
+      div.className = 'project-item'; div.id = pid;
+      div.innerHTML = `
+        <div class="project-item__header">
+          <span class="project-item__num">Réalisation ${projectCount + 1}</span>
+          <button type="button" class="exp-remove" onclick="document.getElementById('${pid}').remove(); projectCount--; document.getElementById('addProjectBtn').style.display='block'; if(!document.querySelectorAll('.project-item').length) document.getElementById('projectsHint').style.display='flex';">✕</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Titre <span class="required">*</span></label>
+            <input type="text" class="form-input proj-title" placeholder="Ex : Site e-commerce Boutique Mode" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Type</label>
+            <div class="select-wrap">
+              <select class="form-input form-select proj-type">
+                <option>Site web</option><option>Vidéo</option><option>Photo</option>
+                <option>Présentation</option><option>Design</option><option>Autre</option>
+              </select>
+              <span class="select-arrow">▾</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description courte</label>
+          <input type="text" class="form-input proj-desc" placeholder="Ex : Développement complet sous WordPress..." />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lien vers le projet <span class="optional-tag">Optionnel</span></label>
+          <input type="url" class="form-input proj-link" placeholder="https://monprojet.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Visuel du projet <span class="optional-tag">Optionnel</span></label>
+          <div class="upload-zone upload-zone--sm" id="projZone_${pid}" onclick="document.getElementById('projFile_${pid}').click()">
+            <input type="file" id="projFile_${pid}" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handleProjectPhoto('${pid}')" />
+            <div class="upload-zone__placeholder" id="projPlaceholder_${pid}">
+              <div class="upload-zone__icon">🖼</div>
+              <p class="upload-zone__text">Capture d'écran, photo, aperçu...</p>
+              <p class="upload-zone__hint">JPG, PNG ou WEBP — max 2MB</p>
+            </div>
+            <img class="upload-zone__preview proj-preview" id="projPreview_${pid}" style="display:none" alt="Aperçu" />
+          </div>
+          <button type="button" class="remove-photo" id="projRemove_${pid}" style="display:none"
+            onclick="document.getElementById('projFile_${pid}').value=''; document.getElementById('projPreview_${pid}').style.display='none'; document.getElementById('projPlaceholder_${pid}').style.display='flex'; this.style.display='none'; document.getElementById('projZone_${pid}').classList.remove('has-photo');">
+            ✕ Supprimer le visuel
+          </button>
+        </div>`;
+      document.getElementById('projectsList').appendChild(div);
+      projectCount++;
+      if (projectCount >= 4) document.getElementById('addProjectBtn').style.display = 'none';
+    }
+
+    function handleProjectPhoto(pid) {
+      const input = document.getElementById(`projFile_${pid}`);
+      const file = input.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) { alert('La photo dépasse 2MB.'); input.value = ''; return; }
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById(`projPreview_${pid}`).src = e.target.result;
+        document.getElementById(`projPreview_${pid}`).style.display = 'block';
+        document.getElementById(`projPlaceholder_${pid}`).style.display = 'none';
+        document.getElementById(`projRemove_${pid}`).style.display = 'inline-flex';
+        document.getElementById(`projZone_${pid}`).classList.add('has-photo');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ==============================
+    // UPLOAD PHOTOS
+    // ==============================
+    function triggerUpload(inputId) {
+      document.getElementById(inputId).click();
+    }
+
+    function handlePhoto(inputId, previewId, zoneId) {
+      const input = document.getElementById(inputId);
+      const file = input.files[0];
+      if (!file) return;
+
+      if (file.size > 2 * 1024 * 1024) {
+        alert('La photo dépasse 2MB. Veuillez choisir une image plus légère.');
+        input.value = '';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const preview = document.getElementById(previewId);
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+
+        const zone = document.getElementById(zoneId);
+        const num = zoneId.replace('uploadZone', '');
+        document.getElementById(`placeholder${num}`).style.display = 'none';
+        document.getElementById(`removePhoto${num}`).style.display = 'inline-flex';
+        zone.classList.add('has-photo');
+
+        // Stocker en base64
+        formData[inputId] = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removePhoto(inputId, previewId, zoneId, removeBtnId, placeholderId) {
+      document.getElementById(inputId).value = '';
+      document.getElementById(previewId).style.display = 'none';
+      document.getElementById(previewId).src = '';
+      document.getElementById(placeholderId).style.display = 'flex';
+      document.getElementById(removeBtnId).style.display = 'none';
+      document.getElementById(zoneId).classList.remove('has-photo');
+      formData[inputId] = null;
+    }
+
+    // ==============================
+    // COMPÉTENCES — TAGS VISUELS
+    // ==============================
+    document.getElementById('skills').addEventListener('input', function () {
+      const preview = document.getElementById('skillsPreview');
+      const tags = this.value.split(',').map(s => s.trim()).filter(Boolean);
+      preview.innerHTML = tags.map(t => `<span class="skill-tag">${t}</span>`).join('');
+    });
+
+    // ==============================
+    // COMPTEUR TEXTAREA
+    // ==============================
+    document.getElementById('aboutText').addEventListener('input', function () {
+      document.getElementById('aboutCount').textContent = this.value.length;
+    });
+
+    // ==============================
+    // AJOUTER EXPÉRIENCE
+    // ==============================
+    function addExperience() {
+      if (expCount >= 5) { alert('Maximum 5 expériences.'); return; }
+      const list = document.getElementById('expList');
+      const div = document.createElement('div');
+      div.className = 'exp-item';
+      div.id = `exp${expCount}`;
+      div.innerHTML = `
+        <div class="exp-item__header">
+          <span class="exp-item__num">Expérience ${expCount + 1}</span>
+          <button type="button" class="exp-remove" onclick="removeExp(${expCount})">✕</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><input type="text" class="form-input" placeholder="Poste" data-field="expTitle" /></div>
+          <div class="form-group"><input type="text" class="form-input" placeholder="Entreprise" data-field="expCompany" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><input type="text" class="form-input" placeholder="Année début" data-field="expStart" /></div>
+          <div class="form-group"><input type="text" class="form-input" placeholder="Année fin" data-field="expEnd" /></div>
+        </div>
+      `;
+      list.appendChild(div);
+      expCount++;
+    }
+
+    function removeExp(id) {
+      const el = document.getElementById(`exp${id}`);
+      if (el) el.remove();
+    }
+
+    // ==============================
+    // GÉNÉRATION IA
+    // ==============================
+    async function generatePortfolio() {
+      collectStep(5);
+
+      // Afficher le loading
+      document.querySelector('.wizard-card').style.display = 'none';
+      document.getElementById('aiLoading').style.display = 'flex';
+
+      // Animation des étapes IA
+      const aiSteps = ['aiStep1', 'aiStep2', 'aiStep3', 'aiStep4'];
+      aiSteps.forEach((id, i) => {
+        setTimeout(() => {
+          document.getElementById(id).classList.add('active');
+        }, i * 2000);
+      });
+
+      // Prompt pour l'IA
+      const prompt = `
+Tu es un expert en création de portfolios professionnels.
+Génère un portfolio complet et professionnel pour cet entrepreneur en JSON uniquement, sans markdown.
+
+Données :
+- Nom complet : ${formData.firstName} ${formData.lastName}
+- Titre : ${formData.jobTitle}
+- Secteur : ${formData.sector}
+- Localisation : ${formData.location}
+- À propos (brut) : ${formData.aboutText}
+- Expériences : ${JSON.stringify(formData.experiences)}
+- Compétences : ${formData.skills.join(', ')}
+- Email : ${formData.contactEmail}
+- WhatsApp : ${formData.whatsapp || 'Non renseigné'}
+- LinkedIn : ${formData.linkedin || 'Non renseigné'}
+- Instagram : ${formData.instagram || 'Non renseigné'}
+
+Réponds UNIQUEMENT avec ce JSON (aucun texte avant ou après) :
+{
+  "slug": "prenom-nom-en-minuscules-sans-accents",
+  "metaTitle": "Titre SEO optimisé (60 chars max)",
+  "metaDescription": "Description SEO (150 chars max)",
+  "headline": "Accroche percutante en 1 phrase",
+  "about": "Texte À propos professionnel et amélioré (150-200 mots)",
+  "skills": ["compétence1", "compétence2", "..."],
+  "experiences": [{"title":"","company":"","period":"","description":"courte description"}],
+  "callToAction": "Phrase d'appel à l'action personnalisée"
+}
+      `;
+
+      try {
+        const response = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 1000,
+            messages: [{ role: 'user', content: prompt }]
+          })
+        });
+
+        const data = await response.json();
+        const raw = data.content.map(i => i.text || '').join('');
+        const clean = raw.replace(/```json|```/g, '').trim();
+        const result = JSON.parse(clean);
+
+        // Stocker et rediriger
+        localStorage.setItem('foliora_generated', JSON.stringify({ ...formData, ...result }));
+        window.location.href = `portfolio/template.html?slug=${result.slug}`;
+
+      } catch (err) {
+        console.error('Erreur IA:', err);
+        document.getElementById('aiLoading').innerHTML = `
+          <div class="ai-loading__card">
+            <div style="font-size:2rem">⚠️</div>
+            <h3 class="ai-loading__title">Une erreur est survenue</h3>
+            <p class="ai-loading__sub">Veuillez réessayer. Si le problème persiste, contactez le support.</p>
+            <button class="btn btn--primary" onclick="location.reload()">Réessayer</button>
+          </div>
+        `;
+      }
+    }
+
+    // ==============================
+    // INIT
+    // ==============================
+    goToStep(1);
+    document.getElementById('prevBtn').style.visibility = 'hidden';
+  </script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Foliora — Créez votre portfolio professionnel en quelques minutes grâce à l'IA. Obtenez votre lien personnel et soyez visible sur Google." />
+  <meta name="keywords" content="portfolio, entrepreneur, présence en ligne, IA, création portfolio" />
+  <meta property="og:title" content="Foliora — Votre portfolio en quelques minutes" />
+  <meta property="og:description" content="Créez votre portfolio professionnel grâce à l'IA et soyez visible sur Google." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://foliora.net" />
+  <title>Foliora — Votre portfolio professionnel en quelques minutes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__dot"></span>
+        Foliora
+      </a>
+      <nav class="nav">
+        <a href="#how" class="nav__link">Comment ça marche</a>
+        <a href="#pricing" class="nav__link">Tarifs</a>
+        <a href="login.html" class="nav__link">Connexion</a>
+        <a href="reviews.html" class="nav__link">avis</a>
+        <a href="login.html" class="btn btn--primary">Commencer</a>
+      </nav>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#how" class="mobile-nav__link">Comment ça marche</a>
+      <a href="#pricing" class="mobile-nav__link">Tarifs</a>
+      <a href="login.html" class="mobile-nav__link">Connexion</a>
+      <a href="reviews.html" class="nav__link">avis</a>
+      <a href="login.html" class="btn btn--primary">Commencer</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg">
+      <div class="hero__blob hero__blob--1"></div>
+      <div class="hero__blob hero__blob--2"></div>
+      <div class="hero__grid"></div>
+    </div>
+    <div class="container hero__inner">
+      <div class="hero__badge">
+        <span class="badge__dot"></span>
+        Propulsé par DPM
+      </div>
+      <h1 class="hero__title">
+        Votre présence en ligne,<br />
+        <span class="hero__title--accent">en quelques minutes.</span>
+      </h1>
+      <p class="hero__sub">
+        Foliora génère votre portfolio professionnel grâce à l'IA.<br />
+        Un lien personnel. Visible sur Google. Dès aujourd'hui.
+      </p>
+      <div class="hero__actions">
+        <a href="login.html" class="btn btn--primary btn--lg">Créer mon portfolio gratuit</a>
+        <a href="#how" class="btn btn--ghost btn--lg">Voir comment ça marche</a>
+      </div>
+      <div class="hero__proof">
+        <div class="proof__avatars">
+          <div class="proof__avatar" style="background:#FBBF24"></div>
+          <div class="proof__avatar" style="background:#34D399"></div>
+          <div class="proof__avatar" style="background:#60A5FA"></div>
+          <div class="proof__avatar" style="background:#F87171"></div>
+        </div>
+        <p class="proof__text">Rejoignez <strong>+200 entrepreneurs</strong> déjà en ligne</p>
+      </div>
+    </div>
+
+    <!-- Portfolio mockup -->
+    <div class="container">
+      <div class="hero__mockup">
+        <div class="mockup__bar">
+          <span class="mockup__dot" style="background:#FF5F57"></span>
+          <span class="mockup__dot" style="background:#FEBC2E"></span>
+          <span class="mockup__dot" style="background:#28C840"></span>
+          <span class="mockup__url">foliora.net/portfolio/<strong>votre-nom</strong></span>
+        </div>
+        <div class="mockup__body">
+          <div class="mockup__sidebar">
+            <div class="mockup__avatar"></div>
+            <div class="mockup__line mockup__line--name"></div>
+            <div class="mockup__line mockup__line--role"></div>
+            <div class="mockup__tags">
+              <span class="mockup__tag">Marketing</span>
+              <span class="mockup__tag">SEO</span>
+              <span class="mockup__tag">Conseil</span>
+            </div>
+          </div>
+          <div class="mockup__content">
+            <div class="mockup__section-title"></div>
+            <div class="mockup__text-block">
+              <div class="mockup__line"></div>
+              <div class="mockup__line mockup__line--short"></div>
+              <div class="mockup__line"></div>
+            </div>
+            <div class="mockup__cards">
+              <div class="mockup__card"></div>
+              <div class="mockup__card"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Simple & Rapide</span>
+        <h2 class="section-title">3 étapes pour être visible en ligne</h2>
+        <p class="section-sub">Pas besoin de coder. Pas besoin d'un designer. Juste vous et vos informations.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step__number">01</div>
+          <div class="step__icon">📝</div>
+          <h3 class="step__title">Remplissez le formulaire</h3>
+          <p class="step__text">Nom, métier, compétences, expériences — nos questions simples guident chaque entrepreneur.</p>
+        </div>
+        <div class="step__arrow">→</div>
+        <div class="step">
+          <div class="step__number">02</div>
+          <div class="step__icon">✨</div>
+          <h3 class="step__title">L'IA génère votre portfolio</h3>
+          <p class="step__text">Notre IA crée un portfolio professionnel, personnalisé et optimisé pour le référencement Google.</p>
+        </div>
+        <div class="step__arrow">→</div>
+        <div class="step">
+          <div class="step__number">03</div>
+          <div class="step__icon">🚀</div>
+          <h3 class="step__title">Partagez votre lien</h3>
+          <p class="step__text">Votre portfolio est en ligne sur <code>foliora.net/portfolio/votre-nom</code>. Partagez-le partout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APERÇU PORTFOLIO -->
+  <section class="preview">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Exemple concret</span>
+        <h2 class="section-title">Ce que votre portfolio ressemblera</h2>
+      </div>
+      <div class="preview__card">
+        <div class="preview__left">
+          <div class="preview__avatar-wrap">
+            <div class="preview__avatar">JD</div>
+            <div class="preview__online"></div>
+          </div>
+          <h3 class="preview__name">Jean Dupont</h3>
+          <p class="preview__role">Consultant Marketing Digital</p>
+          <div class="preview__skills">
+            <span class="skill-tag">Marketing</span>
+            <span class="skill-tag">SEO</span>
+            <span class="skill-tag">Réseaux sociaux</span>
+            <span class="skill-tag">Stratégie</span>
+          </div>
+          <a href="#" class="btn btn--primary btn--sm">Me contacter</a>
+        </div>
+        <div class="preview__right">
+          <div class="preview__section">
+            <h4 class="preview__section-title">À propos</h4>
+            <p class="preview__section-text">Consultant marketing avec 8 ans d'expérience, j'aide les entrepreneurs à développer leur visibilité en ligne et à attirer leurs clients idéaux grâce à des stratégies digitales sur mesure.</p>
+          </div>
+          <div class="preview__section">
+            <h4 class="preview__section-title">Expériences</h4>
+            <div class="preview__exp">
+              <div class="preview__exp-item">
+                <div class="preview__exp-dot"></div>
+                <div>
+                  <strong>Directeur Marketing</strong> — AgencePro<br />
+                  <small>2020 — Aujourd'hui</small>
+                </div>
+              </div>
+              <div class="preview__exp-item">
+                <div class="preview__exp-dot"></div>
+                <div>
+                  <strong>Consultant Indépendant</strong><br />
+                  <small>2016 — 2020</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="preview__note">✦ Généré automatiquement par l'IA Foliora en moins de 2 minutes</p>
+    </div>
+  </section>
+
+  <!-- TARIFICATION -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Tarification</span>
+        <h2 class="section-title">Simple. Transparent. Accessible.</h2>
+        <p class="section-sub">Un seul plan. Tout inclus. Aucune surprise.</p>
+      </div>
+      <div class="pricing__card">
+        <div class="pricing__badge">Le plus populaire</div>
+        <div class="pricing__price">
+          <span class="pricing__amount">5€</span>
+          <span class="pricing__period">/ mois</span>
+        </div>
+        <p class="pricing__desc">Tout ce dont un entrepreneur a besoin pour être visible en ligne.</p>
+        <ul class="pricing__features">
+          <li class="pricing__feature">
+            <span class="feature__check">✓</span>
+            Portfolio professionnel généré par IA
+          </li>
+          <li class="pricing__feature">
+            <span class="feature__check">✓</span>
+            Lien personnel <code>foliora.net/portfolio/vous</code>
+          </li>
+          <li class="pricing__feature">
+            <span class="feature__check">✓</span>
+            Référencement Google (SEO) inclus
+          </li>
+          <li class="pricing__feature">
+            <span class="feature__check">✓</span>
+            Modifications illimitées
+          </li>
+          <li class="pricing__feature">
+            <span class="feature__check">✓</span>
+            Support par email
+          </li>
+        </ul>
+        <a href="login.html" class="btn btn--primary btn--lg btn--full">Commencer maintenant</a>
+        <p class="pricing__guarantee">🔒 Paiement sécurisé via Stripe — Résiliable à tout moment</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta">
+    <div class="container cta__inner">
+      <div class="cta__blob"></div>
+      <h2 class="cta__title">Prêt à exister en ligne ?</h2>
+      <p class="cta__sub">Des milliers d'entrepreneurs attendent de vous découvrir. Ne les faites pas attendre.</p>
+      <a href="login.html" class="btn btn--white btn--lg">Créer mon portfolio maintenant</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__dot"></span>
+        Foliora
+      </a>
+      <p class="footer__tagline">Votre présence en ligne, en quelques minutes.</p>
+      <div class="footer__links">
+        <a href="#" class="footer__link">Mentions légales</a>
+        <a href="#" class="footer__link">Politique de confidentialité</a>
+        <a href="#" class="footer__link">Contact</a>
+      </div>
+      <p class="footer__copy">© 2026 Foliora. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('header--scrolled', window.scrollY > 30);
+    });
+
+    // Burger menu
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        mobileNav.classList.remove('active');
+        burger.classList.remove('active');
+      });
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.step, .preview__card, .pricing__card, .cta__inner').forEach(el => {
+      el.classList.add('reveal');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

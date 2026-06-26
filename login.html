@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Connectez-vous ou créez votre compte Foliora pour générer votre portfolio professionnel." />
+  <title>Foliora — Connexion / Inscription</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body class="auth-page">
+
+  <!-- HEADER MINIMAL -->
+  <header class="auth-header">
+    <div class="container auth-header__inner">
+      <a href="index.html" class="logo">
+        <span class="logo__dot"></span>
+        Foliora
+      </a>
+      <a href="index.html" class="auth-header__back">← Retour à l'accueil</a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="auth-main">
+
+    <!-- LEFT — Visuel -->
+    <div class="auth-visual">
+      <div class="auth-visual__bg">
+        <div class="auth-blob auth-blob--1"></div>
+        <div class="auth-blob auth-blob--2"></div>
+        <div class="auth-grid"></div>
+      </div>
+      <div class="auth-visual__content">
+        <div class="auth-visual__badge">
+          <span class="badge__dot"></span>
+          +200 entrepreneurs en ligne
+        </div>
+        <h2 class="auth-visual__title">
+          Votre portfolio,<br />
+          <span class="auth-visual__accent">prêt en 2 minutes.</span>
+        </h2>
+        <p class="auth-visual__sub">
+          Rejoignez des centaines d'entrepreneurs qui ont déjà leur présence en ligne grâce à Foliora.
+        </p>
+
+        <!-- Témoignages -->
+        <div class="testimonials">
+          <div class="testimonial">
+            <div class="testimonial__avatar" style="background:linear-gradient(135deg,#FBBF24,#F59E0B)">MK</div>
+            <div>
+              <p class="testimonial__text">"Mon portfolio était prêt en moins de 3 minutes. Impressionnant !"</p>
+              <span class="testimonial__author">Marie K. — Consultante RH</span>
+            </div>
+          </div>
+          <div class="testimonial">
+            <div class="testimonial__avatar" style="background:linear-gradient(135deg,#34D399,#059669)">AB</div>
+            <div>
+              <p class="testimonial__text">"Enfin une présence pro en ligne sans coder. Merci Foliora !"</p>
+              <span class="testimonial__author">Amine B. — Coach Business</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — Formulaire -->
+    <div class="auth-form-wrap">
+      <div class="auth-card">
+
+        <!-- Onglets -->
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Connexion</button>
+          <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">Inscription</button>
+          <div class="auth-tab__indicator" id="tabIndicator"></div>
+        </div>
+
+        <!-- FORMULAIRE CONNEXION -->
+        <form class="auth-form" id="formLogin" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">Adresse email</label>
+            <div class="input-wrap">
+              <span class="input-icon">✉</span>
+              <input
+                type="email"
+                id="loginEmail"
+                class="form-input"
+                placeholder="vous@exemple.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <span class="form-error" id="loginEmailErr"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">
+              Mot de passe
+              <a href="#" class="form-label__link">Mot de passe oublié ?</a>
+            </label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input
+                type="password"
+                id="loginPassword"
+                class="form-input"
+                placeholder="••••••••"
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" class="input-toggle" onclick="togglePassword('loginPassword', this)" aria-label="Voir le mot de passe">👁</button>
+            </div>
+            <span class="form-error" id="loginPasswordErr"></span>
+          </div>
+
+          <!-- Alerte globale -->
+          <div class="form-alert form-alert--error" id="loginAlert" style="display:none"></div>
+          <div class="form-alert form-alert--success" id="loginSuccess" style="display:none"></div>
+
+          <button type="submit" class="btn btn--primary btn--full btn--lg" id="loginBtn">
+            <span class="btn-text">Se connecter</span>
+            <span class="btn-loader" style="display:none">⏳</span>
+          </button>
+
+          <p class="auth-switch">
+            Pas encore de compte ?
+            <button type="button" class="auth-switch__link" onclick="switchTab('register')">S'inscrire gratuitement</button>
+          </p>
+        </form>
+
+        <!-- FORMULAIRE INSCRIPTION -->
+        <form class="auth-form" id="formRegister" novalidate style="display:none">
+          <div class="form-group">
+            <label class="form-label" for="registerName">Votre prénom</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input
+                type="text"
+                id="registerName"
+                class="form-input"
+                placeholder="Jean"
+                autocomplete="given-name"
+                required
+              />
+            </div>
+            <span class="form-error" id="registerNameErr"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="registerEmail">Adresse email</label>
+            <div class="input-wrap">
+              <span class="input-icon">✉</span>
+              <input
+                type="email"
+                id="registerEmail"
+                class="form-input"
+                placeholder="vous@exemple.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <span class="form-error" id="registerEmailErr"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="registerPassword">Mot de passe</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input
+                type="password"
+                id="registerPassword"
+                class="form-input"
+                placeholder="8 caractères minimum"
+                autocomplete="new-password"
+                required
+                minlength="8"
+              />
+              <button type="button" class="input-toggle" onclick="togglePassword('registerPassword', this)" aria-label="Voir le mot de passe">👁</button>
+            </div>
+            <span class="form-error" id="registerPasswordErr"></span>
+            <div class="password-strength" id="passwordStrength">
+              <div class="strength-bar">
+                <div class="strength-fill" id="strengthFill"></div>
+              </div>
+              <span class="strength-label" id="strengthLabel"></span>
+            </div>
+          </div>
+
+          <!-- Alerte globale -->
+          <div class="form-alert form-alert--error" id="registerAlert" style="display:none"></div>
+          <div class="form-alert form-alert--success" id="registerSuccess" style="display:none"></div>
+
+          <p class="auth-terms">
+            En vous inscrivant, vous acceptez nos
+            <a href="#">Conditions d'utilisation</a> et notre
+            <a href="#">Politique de confidentialité</a>.
+          </p>
+
+          <button type="submit" class="btn btn--primary btn--full btn--lg" id="registerBtn">
+            <span class="btn-text">Créer mon compte</span>
+            <span class="btn-loader" style="display:none">⏳</span>
+          </button>
+
+          <p class="auth-switch">
+            Déjà un compte ?
+            <button type="button" class="auth-switch__link" onclick="switchTab('login')">Se connecter</button>
+          </p>
+        </form>
+
+      </div>
+
+      <!-- Sécurité -->
+      <div class="auth-security">
+        <span>🔒 Connexion sécurisée SSL</span>
+        <span>·</span>
+        <span>💳 Paiement via Stripe</span>
+        <span>·</span>
+        <span>🇪🇺 Données en Europe</span>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // ---- SWITCH TABS ----
+    function switchTab(tab) {
+      const isLogin = tab === 'login';
+      document.getElementById('formLogin').style.display = isLogin ? 'flex' : 'none';
+      document.getElementById('formRegister').style.display = isLogin ? 'none' : 'flex';
+      document.getElementById('tabLogin').classList.toggle('active', isLogin);
+      document.getElementById('tabRegister').classList.toggle('active', !isLogin);
+      document.getElementById('tabIndicator').style.transform = isLogin ? 'translateX(0)' : 'translateX(100%)';
+    }
+
+    // ---- TOGGLE PASSWORD ----
+    function togglePassword(id, btn) {
+      const input = document.getElementById(id);
+      const isHidden = input.type === 'password';
+      input.type = isHidden ? 'text' : 'password';
+      btn.textContent = isHidden ? '🙈' : '👁';
+    }
+
+    // ---- PASSWORD STRENGTH ----
+    document.getElementById('registerPassword').addEventListener('input', function () {
+      const val = this.value;
+      const fill = document.getElementById('strengthFill');
+      const label = document.getElementById('strengthLabel');
+      let score = 0;
+      if (val.length >= 8) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+      const levels = [
+        { width: '0%', color: '#E5E8F0', text: '' },
+        { width: '25%', color: '#F87171', text: 'Faible' },
+        { width: '50%', color: '#FBBF24', text: 'Moyen' },
+        { width: '75%', color: '#60A5FA', text: 'Bon' },
+        { width: '100%', color: '#22C55E', text: 'Excellent' },
+      ];
+      const level = levels[score];
+      fill.style.width = level.width;
+      fill.style.background = level.color;
+      label.textContent = level.text;
+      label.style.color = level.color;
+    });
+
+    // ---- VALIDATION ----
+    function showError(id, msg) {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = msg; el.style.display = msg ? 'block' : 'none'; }
+    }
+    function clearErrors(...ids) {
+      ids.forEach(id => showError(id, ''));
+    }
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    function setLoading(btnId, loading) {
+      const btn = document.getElementById(btnId);
+      btn.querySelector('.btn-text').style.display = loading ? 'none' : 'inline';
+      btn.querySelector('.btn-loader').style.display = loading ? 'inline' : 'none';
+      btn.disabled = loading;
+    }
+
+    // ---- FORM LOGIN ----
+    document.getElementById('formLogin').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearErrors('loginEmailErr', 'loginPasswordErr');
+      document.getElementById('loginAlert').style.display = 'none';
+      document.getElementById('loginSuccess').style.display = 'none';
+
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      let valid = true;
+
+      if (!email) { showError('loginEmailErr', 'Veuillez entrer votre email.'); valid = false; }
+      else if (!isValidEmail(email)) { showError('loginEmailErr', 'Email invalide.'); valid = false; }
+      if (!password) { showError('loginPasswordErr', 'Veuillez entrer votre mot de passe.'); valid = false; }
+
+      if (!valid) return;
+
+      setLoading('loginBtn', true);
+
+      // TODO : Connecter Supabase ici
+      // const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      // if (error) { ... } else { window.location.href = 'dashboard.html'; }
+
+      // Simulation temporaire
+      setTimeout(() => {
+        setLoading('loginBtn', false);
+        const successEl = document.getElementById('loginSuccess');
+        successEl.textContent = '✓ Connexion réussie ! Redirection...';
+        successEl.style.display = 'block';
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 1500);
+      }, 1200);
+    });
+
+    // ---- FORM REGISTER ----
+    document.getElementById('formRegister').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      clearErrors('registerNameErr', 'registerEmailErr', 'registerPasswordErr');
+      document.getElementById('registerAlert').style.display = 'none';
+      document.getElementById('registerSuccess').style.display = 'none';
+
+      const name = document.getElementById('registerName').value.trim();
+      const email = document.getElementById('registerEmail').value.trim();
+      const password = document.getElementById('registerPassword').value;
+      let valid = true;
+
+      if (!name) { showError('registerNameErr', 'Veuillez entrer votre prénom.'); valid = false; }
+      if (!email) { showError('registerEmailErr', 'Veuillez entrer votre email.'); valid = false; }
+      else if (!isValidEmail(email)) { showError('registerEmailErr', 'Email invalide.'); valid = false; }
+      if (!password) { showError('registerPasswordErr', 'Veuillez entrer un mot de passe.'); valid = false; }
+      else if (password.length < 8) { showError('registerPasswordErr', 'Minimum 8 caractères.'); valid = false; }
+
+      if (!valid) return;
+
+      setLoading('registerBtn', true);
+
+      // TODO : Connecter Supabase ici
+      // const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name } } });
+      // if (error) { ... } else { window.location.href = 'dashboard.html'; }
+
+      // Simulation temporaire
+      setTimeout(() => {
+        setLoading('registerBtn', false);
+        const successEl = document.getElementById('registerSuccess');
+        successEl.textContent = '✓ Compte créé ! Vérifiez votre email pour confirmer.';
+        successEl.style.display = 'block';
+      }, 1200);
+    });
+
+    // ---- INIT ----
+    switchTab('login');
+  </script>
+</body>
+</html>

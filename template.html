@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO dynamique — rempli par JS -->
+  <title id="pageTitle">Portfolio — Foliora</title>
+  <meta name="description" id="metaDesc" content="" />
+  <meta property="og:title" id="ogTitle" content="" />
+  <meta property="og:description" id="ogDesc" content="" />
+  <meta property="og:type" content="profile" />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue:#2D6EFF; --blue-dark:#1A4FCC; --blue-light:#EEF3FF;
+      --text:#1A1A2E; --text-muted:#6B7280; --bg:#FFFFFF; --bg-alt:#F7F8FC;
+      --border:#E5E8F0; --radius:16px; --radius-sm:8px;
+      --shadow:0 4px 24px rgba(45,110,255,0.08);
+      --shadow-lg:0 16px 48px rgba(45,110,255,0.14);
+      --font-display:'Syne',sans-serif; --font-body:'DM Sans',sans-serif;
+      --transition:0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);color:var(--text);background:var(--bg);line-height:1.65;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;display:block;}
+    .container{max-width:900px;margin:0 auto;padding:0 24px;}
+
+    /* BOUTONS */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:50px;font-family:var(--font-body);font-weight:500;font-size:0.95rem;cursor:pointer;border:none;transition:all var(--transition);}
+    .btn--primary{background:var(--blue);color:#fff;box-shadow:0 4px 16px rgba(45,110,255,0.3);}
+    .btn--primary:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,110,255,0.4);}
+    .btn--ghost{background:transparent;color:var(--text);border:1.5px solid var(--border);}
+    .btn--ghost:hover{border-color:var(--blue);color:var(--blue);}
+    .btn--sm{padding:9px 18px;font-size:0.875rem;}
+
+    /* NAV */
+    .portfolio-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all var(--transition);}
+    .portfolio-nav.scrolled{background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:var(--shadow);padding:12px 0;}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-link{font-size:0.875rem;color:var(--text-muted);transition:color var(--transition);}
+    .nav-link:hover{color:var(--blue);}
+    .nav-logo{font-family:var(--font-display);font-weight:800;font-size:1rem;color:var(--text);}
+    .nav-logo span{color:var(--blue);}
+
+    /* HERO */
+    .hero{padding:120px 0 80px;position:relative;overflow:hidden;}
+    .hero__bg{position:absolute;inset:0;z-index:0;}
+    .hero__blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.4;}
+    .hero__blob--1{width:500px;height:500px;background:radial-gradient(circle,#DBEAFE,#EEF3FF);top:-150px;left:-100px;animation:float 9s ease-in-out infinite;}
+    .hero__blob--2{width:350px;height:350px;background:radial-gradient(circle,#E0E7FF,#F0FDF4);bottom:0;right:-80px;animation:float 11s ease-in-out infinite reverse;}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
+    .hero__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(45,110,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(45,110,255,0.04) 1px,transparent 1px);background-size:40px 40px;}
+    .hero-inner{position:relative;z-index:1;display:flex;align-items:center;gap:60px;flex-wrap:wrap;}
+    .hero-photo-wrap{flex-shrink:0;position:relative;}
+    .hero-photo{width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:var(--shadow-lg);}
+    .hero-initials{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#60A5FA);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:2.8rem;color:#fff;border:4px solid #fff;box-shadow:var(--shadow-lg);}
+    .hero-online{position:absolute;bottom:8px;right:8px;width:20px;height:20px;background:#22C55E;border-radius:50%;border:3px solid #fff;}
+    .hero-info{flex:1;min-width:260px;}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue);padding:5px 14px;border-radius:50px;font-size:0.8rem;font-weight:500;margin-bottom:16px;border:1px solid rgba(45,110,255,0.15);}
+    .hero-name{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-1.5px;color:var(--text);line-height:1.1;margin-bottom:8px;}
+    .hero-title{font-size:1.1rem;color:var(--blue);font-weight:500;margin-bottom:6px;}
+    .hero-location{font-size:0.9rem;color:var(--text-muted);margin-bottom:16px;}
+    .hero-headline{font-size:1rem;color:var(--text);font-weight:300;line-height:1.7;margin-bottom:28px;max-width:480px;}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+    /* SECTIONS */
+    .section{padding:72px 0;}
+    .section--alt{background:var(--bg-alt);}
+    .section-label{display:inline-block;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--blue);background:var(--blue-light);padding:4px 14px;border-radius:50px;margin-bottom:12px;}
+    .section-title{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-0.5px;color:var(--text);margin-bottom:8px;}
+    .section-header{margin-bottom:40px;}
+
+    /* À PROPOS */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+    .about-text{font-size:1rem;color:var(--text-muted);font-weight:300;line-height:1.8;}
+    .about-photo{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-lg);max-height:320px;}
+    .about-photo img{width:100%;height:100%;object-fit:cover;}
+
+    /* COMPÉTENCES */
+    .skills-wrap{display:flex;flex-wrap:wrap;gap:10px;}
+    .skill-pill{background:var(--blue-light);color:var(--blue);padding:8px 18px;border-radius:50px;font-size:0.875rem;font-weight:500;border:1px solid rgba(45,110,255,0.15);transition:all var(--transition);}
+    .skill-pill:hover{background:var(--blue);color:#fff;transform:translateY(-2px);}
+
+    /* EXPÉRIENCES */
+    .timeline{display:flex;flex-direction:column;gap:0;position:relative;}
+    .timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--border);}
+    .timeline-item{display:flex;gap:24px;padding-bottom:32px;position:relative;}
+    .timeline-item:last-child{padding-bottom:0;}
+    .timeline-dot{width:32px;height:32px;border-radius:50%;background:var(--blue-light);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+    .timeline-dot-inner{width:10px;height:10px;background:var(--blue);border-radius:50%;}
+    .timeline-content{flex:1;padding-top:4px;}
+    .timeline-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px;}
+    .timeline-company{font-size:0.875rem;color:var(--blue);font-weight:500;margin-bottom:4px;}
+    .timeline-period{font-size:0.8rem;color:var(--text-muted);background:var(--bg-alt);padding:2px 10px;border-radius:50px;display:inline-block;margin-bottom:8px;}
+    .timeline-desc{font-size:0.875rem;color:var(--text-muted);font-weight:300;line-height:1.6;}
+
+    /* RÉALISATIONS */
+    .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+    .project-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:all var(--transition);}
+    .project-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+    .project-card__image{height:180px;background:var(--bg-alt);position:relative;overflow:hidden;}
+    .project-card__image img{width:100%;height:100%;object-fit:cover;}
+    .project-card__no-image{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;background:linear-gradient(135deg,var(--bg-alt),var(--blue-light));}
+    .project-card__type-badge{position:absolute;top:12px;left:12px;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-radius:50px;padding:4px 10px;font-size:0.75rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:4px;}
+    .project-card__body{padding:20px;}
+    .project-card__title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+    .project-card__desc{font-size:0.85rem;color:var(--text-muted);font-weight:300;line-height:1.5;margin-bottom:14px;}
+    .project-card__link{font-size:0.825rem;color:var(--blue);font-weight:500;display:inline-flex;align-items:center;gap:4px;transition:gap var(--transition);}
+    .project-card__link:hover{gap:8px;}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+    .contact-item{display:flex;align-items:center;gap:14px;background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:all var(--transition);}
+    .contact-item:hover{border-color:var(--blue);background:var(--blue-light);transform:translateY(-2px);}
+    .contact-item__icon{width:40px;height:40px;border-radius:var(--radius-sm);background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;box-shadow:var(--shadow);}
+    .contact-item__label{font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
+    .contact-item__value{font-size:0.9rem;color:var(--text);font-weight:500;}
+    .contact-cta{text-align:center;background:linear-gradient(135deg,var(--blue),#60A5FA);border-radius:var(--radius);padding:40px;color:#fff;}
+    .contact-cta__title{font-family:var(--font-display);font-size:1.5rem;font-weight:800;margin-bottom:8px;}
+    .contact-cta__sub{font-size:0.9rem;opacity:0.85;margin-bottom:24px;}
+
+    /* FOOTER */
+    .portfolio-footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;}
+    .footer-credit{font-size:0.8rem;color:var(--text-muted);}
+    .footer-credit a{color:var(--blue);font-weight:500;}
+
+    /* WORK PHOTO SECTION */
+    .work-photo-section{margin-top:32px;border-radius:var(--radius);overflow:hidden;max-height:300px;box-shadow:var(--shadow);}
+    .work-photo-section img{width:100%;height:100%;object-fit:cover;}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .hero-inner{flex-direction:column;text-align:center;gap:32px;}
+      .hero-actions{justify-content:center;}
+      .about-grid{grid-template-columns:1fr;}
+      .projects-grid{grid-template-columns:1fr;}
+      .contact-grid{grid-template-columns:1fr;}
+      .nav-links{display:none;}
+      .hero{padding:100px 0 60px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="portfolio-nav" id="portfolioNav">
+    <div class="container nav-inner">
+      <div class="nav-links">
+        <a href="#about" class="nav-link">À propos</a>
+        <a href="#experiences" class="nav-link">Expériences</a>
+        <a href="#projects" class="nav-link" id="navProjects" style="display:none">Réalisations</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-logo">Créé avec <span>Foliora</span></div>
+      <a href="#contact" class="btn btn--primary btn--sm">Me contacter</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__bg">
+      <div class="hero__blob hero__blob--1"></div>
+      <div class="hero__blob hero__blob--2"></div>
+      <div class="hero__grid"></div>
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-photo-wrap">
+        <img id="heroPhoto" class="hero-photo" src="" alt="Photo de profil" style="display:none" />
+        <div id="heroInitials" class="hero-initials">JD</div>
+        <div class="hero-online"></div>
+      </div>
+      <div class="hero-info">
+        <div class="hero-badge">
+          <span style="width:7px;height:7px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite"></span>
+          Disponible pour collaborer
+        </div>
+        <h1 class="hero-name" id="heroName">Jean Dupont</h1>
+        <p class="hero-title" id="heroJobTitle">Consultant Marketing</p>
+        <p class="hero-location" id="heroLocation">📍 Paris, France</p>
+        <p class="hero-headline" id="heroHeadline">Accroche personnalisée générée par l'IA.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn--primary">Me contacter</a>
+          <a href="#about" class="btn btn--ghost">En savoir plus</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section class="section section--alt" id="about">
+    <div class="container reveal">
+      <div class="section-header">
+        <span class="section-label">À propos</span>
+        <h2 class="section-title" id="aboutTitle">Qui suis-je ?</h2>
+      </div>
+      <div class="about-grid" id="aboutGrid">
+        <p class="about-text" id="aboutText">Texte généré par l'IA.</p>
+        <div class="about-photo" id="lifestylePhotoWrap" style="display:none">
+          <img id="lifestylePhotoImg" src="" alt="Photo lifestyle" />
+        </div>
+      </div>
+
+      <!-- Photo métier -->
+      <div class="work-photo-section" id="workPhotoSection" style="display:none">
+        <img id="workPhotoImg" src="" alt="Environnement de travail" />
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section class="section" id="skills">
+    <div class="container reveal">
+      <div class="section-header">
+        <span class="section-label">Compétences</span>
+        <h2 class="section-title">Ce que je maîtrise</h2>
+      </div>
+      <div class="skills-wrap" id="skillsWrap"></div>
+    </div>
+  </section>
+
+  <!-- EXPÉRIENCES -->
+  <section class="section section--alt" id="experiences">
+    <div class="container reveal">
+      <div class="section-header">
+        <span class="section-label">Parcours</span>
+        <h2 class="section-title">Mes expériences</h2>
+      </div>
+      <div class="timeline" id="timeline"></div>
+
+      <!-- Photo expérience -->
+      <div class="work-photo-section" id="expPhotoSection" style="display:none;margin-top:40px;">
+        <img id="expPhotoImg" src="" alt="Réalisation" />
+      </div>
+    </div>
+  </section>
+
+  <!-- RÉALISATIONS -->
+  <section class="section" id="projects" style="display:none">
+    <div class="container reveal">
+      <div class="section-header">
+        <span class="section-label">Réalisations</span>
+        <h2 class="section-title">Mes projets</h2>
+      </div>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section--alt" id="contact">
+    <div class="container reveal">
+      <div class="section-header">
+        <span class="section-label">Contact</span>
+        <h2 class="section-title">Travaillons ensemble</h2>
+      </div>
+      <div class="contact-grid" id="contactGrid"></div>
+      <div class="contact-cta">
+        <h3 class="contact-cta__title" id="ctaTitle">Prêt à démarrer un projet ?</h3>
+        <p class="contact-cta__sub" id="ctaSub">Contactez-moi dès aujourd'hui.</p>
+        <a href="#" id="ctaBtn" class="btn" style="background:#fff;color:var(--blue);font-weight:600;">✉ M'envoyer un email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="portfolio-footer">
+    <div class="container">
+      <p class="footer-credit">Portfolio créé avec <a href="https://foliora.net">Foliora</a> — Créez le vôtre en 2 minutes ✦</p>
+    </div>
+  </footer>
+
+  <script>
+    const typeIcons = {'Site web':'🌐','Vidéo':'🎬','Photo':'📸','Présentation':'📊','Design':'🎨','Autre':'📁'};
+
+    function loadPortfolio() {
+      const raw = localStorage.getItem('foliora_generated');
+      if (!raw) {
+        document.body.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;gap:16px;"><h2>Portfolio introuvable</h2><p style="color:#6B7280">Aucune donnée trouvée. Veuillez créer votre portfolio.</p><a href="../create.html" style="background:#2D6EFF;color:#fff;padding:12px 24px;border-radius:50px;text-decoration:none;">Créer mon portfolio</a></div>`;
+        return;
+      }
+
+      const d = JSON.parse(raw);
+
+      // SEO
+      const fullName = `${d.firstName} ${d.lastName}`;
+      document.getElementById('pageTitle').textContent = d.metaTitle || `${fullName} — Portfolio`;
+      document.getElementById('metaDesc').setAttribute('content', d.metaDescription || '');
+      document.getElementById('ogTitle').setAttribute('content', d.metaTitle || fullName);
+      document.getElementById('ogDesc').setAttribute('content', d.metaDescription || '');
+
+      // Hero
+      const initials = (d.firstName?.[0]||'') + (d.lastName?.[0]||'');
+      if (d.profilePhoto) {
+        document.getElementById('heroPhoto').src = d.profilePhoto;
+        document.getElementById('heroPhoto').style.display = 'block';
+        document.getElementById('heroInitials').style.display = 'none';
+      } else {
+        document.getElementById('heroInitials').textContent = initials;
+      }
+      document.getElementById('heroName').textContent = fullName;
+      document.getElementById('heroJobTitle').textContent = d.jobTitle || '';
+      document.getElementById('heroLocation').textContent = `📍 ${d.location || ''}`;
+      document.getElementById('heroHeadline').textContent = d.headline || '';
+
+      // À propos
+      document.getElementById('aboutTitle').textContent = `Qui est ${d.firstName} ?`;
+      document.getElementById('aboutText').textContent = d.about || d.aboutText || '';
+      if (d.lifestylePhoto) {
+        document.getElementById('lifestylePhotoImg').src = d.lifestylePhoto;
+        document.getElementById('lifestylePhotoWrap').style.display = 'block';
+      } else {
+        document.getElementById('aboutGrid').style.gridTemplateColumns = '1fr';
+      }
+      if (d.workPhoto) {
+        document.getElementById('workPhotoImg').src = d.workPhoto;
+        document.getElementById('workPhotoSection').style.display = 'block';
+      }
+
+      // Compétences
+      const skillsWrap = document.getElementById('skillsWrap');
+      const skills = d.skills || d.skills || [];
+      skills.forEach(skill => {
+        const span = document.createElement('span');
+        span.className = 'skill-pill';
+        span.textContent = skill;
+        skillsWrap.appendChild(span);
+      });
+
+      // Expériences
+      const timeline = document.getElementById('timeline');
+      const exps = d.experiences || [];
+      exps.forEach(exp => {
+        const div = document.createElement('div');
+        div.className = 'timeline-item';
+        div.innerHTML = `
+          <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+          <div class="timeline-content">
+            <h3 class="timeline-title">${exp.title || ''}</h3>
+            <p class="timeline-company">${exp.company || ''}</p>
+            <span class="timeline-period">${exp.period || (exp.start ? `${exp.start} — ${exp.end||'Aujourd\'hui'}` : '')}</span>
+            <p class="timeline-desc">${exp.description || ''}</p>
+          </div>`;
+        timeline.appendChild(div);
+      });
+      if (d.expPhoto) {
+        document.getElementById('expPhotoImg').src = d.expPhoto;
+        document.getElementById('expPhotoSection').style.display = 'block';
+      }
+
+      // Réalisations
+      const projects = d.projects || [];
+      if (projects.length > 0) {
+        document.getElementById('projects').style.display = 'block';
+        document.getElementById('navProjects').style.display = 'block';
+        const grid = document.getElementById('projectsGrid');
+        projects.forEach(proj => {
+          const icon = typeIcons[proj.type] || '📁';
+          const card = document.createElement('div');
+          card.className = 'project-card';
+          card.innerHTML = `
+            <div class="project-card__image">
+              ${proj.image ? `<img src="${proj.image}" alt="${proj.title}" />` : `<div class="project-card__no-image">${icon}</div>`}
+              <div class="project-card__type-badge">${icon} ${proj.type || 'Projet'}</div>
+            </div>
+            <div class="project-card__body">
+              <h3 class="project-card__title">${proj.title}</h3>
+              <p class="project-card__desc">${proj.desc || ''}</p>
+              ${proj.link ? `<a href="${proj.link}" target="_blank" rel="noopener" class="project-card__link">Voir le projet →</a>` : ''}
+            </div>`;
+          grid.appendChild(card);
+        });
+      }
+
+      // Contact
+      const contactGrid = document.getElementById('contactGrid');
+      const contacts = [
+        {icon:'✉', label:'Email', value:d.contactEmail, href:`mailto:${d.contactEmail}`},
+        d.whatsapp ? {icon:'💬', label:'WhatsApp', value:d.whatsapp, href:`https://wa.me/${d.whatsapp.replace(/\s+/g,'')}`} : null,
+        d.linkedin ? {icon:'🔗', label:'LinkedIn', value:'Voir le profil', href:d.linkedin} : null,
+        d.instagram ? {icon:'📷', label:'Instagram', value:d.instagram, href:`https://instagram.com/${d.instagram.replace('@','')}`} : null,
+        d.website ? {icon:'🌐', label:'Site web', value:d.website, href:d.website} : null,
+      ].filter(Boolean);
+
+      contacts.forEach(c => {
+        const a = document.createElement('a');
+        a.href = c.href;
+        a.target = '_blank';
+        a.className = 'contact-item';
+        a.innerHTML = `<div class="contact-item__icon">${c.icon}</div><div><div class="contact-item__label">${c.label}</div><div class="contact-item__value">${c.value}</div></div>`;
+        contactGrid.appendChild(a);
+      });
+
+      // CTA
+      document.getElementById('ctaTitle').textContent = d.callToAction || 'Prêt à démarrer un projet ?';
+      document.getElementById('ctaSub').textContent = `Contactez ${d.firstName} dès aujourd'hui.`;
+      document.getElementById('ctaBtn').href = `mailto:${d.contactEmail}`;
+      document.getElementById('ctaBtn').textContent = `✉ Écrire à ${d.firstName}`;
+    }
+
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('portfolioNav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    loadPortfolio();
+  </script>
+</body>
+</html>
